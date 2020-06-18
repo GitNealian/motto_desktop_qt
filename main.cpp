@@ -1,5 +1,11 @@
+#include <QCoreApplication>
 #include <QGuiApplication>
+#include <QApplication>
 #include <QQmlApplicationEngine>
+#include <QtCore/Qt>
+#include <QMainWindow>
+#include <QQuickWidget>
+#include <QDockWidget>
 
 int main(int argc, char *argv[])
 {

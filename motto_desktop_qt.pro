@@ -1,4 +1,5 @@
 QT += quick
+QT += quickwidgets
 
 CONFIG += c++11
 
