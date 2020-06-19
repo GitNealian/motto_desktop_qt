@@ -38,6 +38,10 @@ Window {
         id: layout
         Label {
             text: "静"
+            Layout.fillWidth: true
+            verticalAlignment: Text.AlignTop
+            renderType: Text.QtRendering
+            horizontalAlignment: Text.AlignLeft
             font.pixelSize: 120
             color: "black"
         }

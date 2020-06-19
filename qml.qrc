@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>settings.qml</file>
+        <file>opacity.qml</file>
     </qresource>
 </RCC>
