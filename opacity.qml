@@ -7,7 +7,10 @@ Window {
     visible: true
     width: pane.width
     height:pane.height
-
+    Component.onCompleted: {
+        setX(Screen.width / 2 - width / 2);
+        setY(Screen.height / 3 - height / 2);
+    }
     Pane {
         id: pane
         padding: 40
@@ -20,6 +23,31 @@ Window {
                 value: 0.5
                 onValueChanged: {
                     textNumber.text = Math.floor(slider.value * 100) + '%'
+                }
+                background: Rectangle {
+                    x: slider.leftPadding
+                    y: slider.topPadding + slider.availableHeight / 2 - height / 2
+                    implicitWidth: 200
+                    implicitHeight: 6
+                    width: slider.availableWidth
+                    height: implicitHeight
+                    radius: 2
+                    color: "#bdbebf"
+
+                    Rectangle {
+                        width: slider.visualPosition * parent.width
+                        height: parent.height
+                        color: "black"
+                        radius: 2
+                    }
+                }
+                handle: Rectangle {
+                    x: slider.leftPadding + slider.visualPosition * (slider.availableWidth - width)
+                    y: slider.topPadding + slider.availableHeight / 2 - height / 2
+                    implicitWidth: 13
+                    implicitHeight: 26
+                    radius: 3
+                    color: "black"
                 }
             }
 
