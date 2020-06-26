@@ -3,10 +3,14 @@ import QtQuick.Controls 2.12
 import QtQuick.Window 2.15
 
 Window {
+    id: root
     title: '透明度'
     visible: true
     width: pane.width
     height:pane.height
+
+    signal opacityChanged(real value)
+
     Component.onCompleted: {
         setX(Screen.width / 2 - width / 2);
         setY(Screen.height / 3 - height / 2);
@@ -23,6 +27,7 @@ Window {
                 value: 0.5
                 onValueChanged: {
                     textNumber.text = Math.floor(slider.value * 100) + '%'
+                    root.opacityChanged(slider.value)
                 }
                 background: Rectangle {
                     x: slider.leftPadding

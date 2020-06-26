@@ -1,16 +1,89 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Layouts 1.3
-import QtQuick.Controls.Material 2.12
-import QtQuick.Controls 2.12
+import QtQuick.Controls 2.15
 
 Window {
     id: window
     visible: true
-    flags: Qt.ToolTip | Qt.WindowStaysOnTopHint
+    flags: Qt.ToolTip
     width: layout.width
     height: layout.height
     color:  "transparent"
+
+    property bool adjustment: false
+    property int posX: 0
+    property int posY: 0
+
+    function exit(){
+        Qt.quit()
+    }
+
+    Component.onCompleted: {
+        window.posX = window.x
+        window.posY = window.y
+    }
+
+    Button {
+        visible: false
+        id: closeButton
+        width: 30
+        height: 30
+        contentItem:
+            Text {
+            color: "green"
+            text: "✔"
+            font.pixelSize: 20
+        }
+
+        anchors.right: parent.right
+        anchors.rightMargin: 0
+        anchors.top: parent.top
+        anchors.topMargin: 0
+        background: Rectangle{
+            color: "white"
+            radius: 15
+        }
+        onClicked: {
+            window.posX = window.x
+            window.posY = window.y
+            mouseArea.visible = true
+            closeButton.visible = false
+            adjustment = false
+            window.color = "transparent"
+            window.close()
+            window.flags = Qt.ToolTip
+            window.show()
+        }
+    }
+
+    Connections {
+        target: menu
+        function onExit() {
+            Qt.quit()
+        }
+
+        function onColor(color){
+            console.log(color)
+        }
+
+        function onAdjust(){
+            window.adjustment = true
+            window.close()
+            window.flags = Qt.Window | Qt.FramelessWindowHint
+            window.setX(window.posX)
+            window.setY(window.posY)
+            window.show()
+            mouseArea.visible = false
+            window.color = "#0F001100"
+            closeButton.visible = true
+        }
+
+        function onSettings(){
+            settingsWindow.show()
+        }
+    }
+
     Timer {
         id: timer
         interval: 300;
@@ -23,12 +96,15 @@ Window {
         }
     }
     MouseArea{
+        id: mouseArea
         width: layout.width
         height: layout.height
         onEntered: {
-            window.opacity = 0.1
-            window.flags = window.flags | Qt.WindowTransparentForInput
-            timer.start()
+            if( !window.adjustment){
+                window.opacity = 0.1
+                window.flags = window.flags | Qt.WindowTransparentForInput
+                timer.start()
+            }
         }
         hoverEnabled: true
     }
@@ -51,4 +127,21 @@ Window {
             color: "black"
         }
     }
+    Opacity {
+        id: opacityWindow
+        visible: false
+        onOpacityChanged: {
+            window.opacity = value
+        }
+    }
+
+    Settings {
+        id: settingsWindow
+    }
 }
+
+/*##^##
+Designer {
+    D{i:1;anchors_y:0}
+}
+##^##*/

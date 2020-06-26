@@ -18,7 +18,8 @@ Window {
         setY(Screen.height / 3 - height / 2);
     }
     title: '设置'
-    visible: true
+
+    visible: false
     Pane {
         id: pane
         x: 0

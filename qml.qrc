@@ -1,20 +1,19 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>settings.qml</file>
-        <file>opacity.qml</file>
+        <file>Settings.qml</file>
+        <file>Opacity.qml</file>
     </qresource>
-
-	<qresource prefix="images/">
-	    <file>style_1.png</file>
-	    <file>style_2.png</file>
-	    <file>style_3.png</file>
-	    <file>style_4.png</file>
-	    <file>style_5.png</file>
-	    <file>style_1_active.png</file>
-	    <file>style_2_active.png</file>
-	    <file>style_3_active.png</file>
-	    <file>style_4_active.png</file>
-	    <file>style_5_active.png</file>
-	</qresource>
+    <qresource prefix="/images">
+        <file>style_1.png</file>
+        <file>style_2.png</file>
+        <file>style_3.png</file>
+        <file>style_4.png</file>
+        <file>style_5.png</file>
+        <file>style_1_active.png</file>
+        <file>style_2_active.png</file>
+        <file>style_3_active.png</file>
+        <file>style_4_active.png</file>
+        <file>style_5_active.png</file>
+    </qresource>
 </RCC>
