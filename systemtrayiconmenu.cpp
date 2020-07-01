@@ -14,15 +14,20 @@ SystemTrayIconMenu::SystemTrayIconMenu()
     QAction* dark = new QAction("深色");
     dark->setCheckable(true);
 
+    QAction* autoColor = new QAction("自动");
+    autoColor->setCheckable(true);
+
     QActionGroup* group = new QActionGroup(this);
 
     connect(group, SIGNAL(triggered(QAction* )),this, SLOT(onColor(QAction* )));
 
     light->setActionGroup(group);
     dark->setActionGroup(group);
+    autoColor->setActionGroup(group);
 
     subMenu->addAction(light);
     subMenu->addAction(dark);
+    subMenu->addAction(autoColor);
     addMenu(subMenu);
 
     QAction* adjust = new QAction("调整");

@@ -7,8 +7,6 @@ Window {
     id: window
     visible: true
     flags: Qt.ToolTip
-    width: layout.width
-    height: layout.height
     color:  "transparent"
 
     property bool adjustment: false
@@ -19,31 +17,53 @@ Window {
         Qt.quit()
     }
 
+    function onWindowSizeChange(){
+        console.log(window.width)
+        layout.width = window.width
+        layout.height = window.height
+    }
+
     Component.onCompleted: {
         window.posX = window.x
         window.posY = window.y
+    }
+    Rectangle {
+        id: windowBackgroud
+        visible: false
+        anchors.fill: parent
+        color: "#1F000000"
+        radius: 10
     }
 
     Button {
         visible: false
         id: closeButton
-        width: 30
-        height: 30
+        width: 25
+        height: 25
         contentItem:
             Text {
-            color: "green"
+            color: "white"
             text: "✔"
-            font.pixelSize: 20
+            font.pixelSize: 14
         }
 
         anchors.right: parent.right
-        anchors.rightMargin: 0
+        anchors.rightMargin: 5
         anchors.top: parent.top
-        anchors.topMargin: 0
+        anchors.topMargin: 5
         background: Rectangle{
-            color: "white"
-            radius: 15
+            color: "#44000000"
+            radius: 12.5
         }
+        onHoveredChanged: {
+            if(hovered){
+                background.color ="#66000000"
+            }else{
+                background.color = "#44000000"
+            }
+
+        }
+
         onClicked: {
             window.posX = window.x
             window.posY = window.y
@@ -54,6 +74,7 @@ Window {
             window.close()
             window.flags = Qt.ToolTip
             window.show()
+            windowBackgroud.visible = false
         }
     }
 
@@ -75,8 +96,8 @@ Window {
             window.setY(window.posY)
             window.show()
             mouseArea.visible = false
-            window.color = "#0F001100"
             closeButton.visible = true
+            windowBackgroud.visible = true
         }
 
         function onSettings(){
@@ -112,21 +133,31 @@ Window {
     ColumnLayout {
         spacing: 0
         id: layout
+        anchors.fill: parent
         Label {
-            text: "静"
+            text: "人生就像騎腳踏車，想保持平衡就得往前走。"
+            rightPadding: 20
+            wrapMode: Text.WrapAnywhere
+            padding: 10
             Layout.fillWidth: true
             verticalAlignment: Text.AlignTop
             renderType: Text.QtRendering
             horizontalAlignment: Text.AlignLeft
-            font.pixelSize: 120
+            font.pixelSize: 28
             color: "black"
         }
         Label {
-            text: "涵养精神"
-            font.pixelSize: 45
+            text: "—— 愛因斯坦"
+            wrapMode: Text.WordWrap
+            padding: 5
+            topPadding: -5
+            Layout.fillWidth: true
+            horizontalAlignment: Text.AlignRight
+            font.pixelSize: 24
             color: "black"
         }
     }
+
     Opacity {
         id: opacityWindow
         visible: false
@@ -142,6 +173,6 @@ Window {
 
 /*##^##
 Designer {
-    D{i:1;anchors_y:0}
+    D{i:0;autoSize:true;height:480;width:640}D{i:1;anchors_y:0}
 }
 ##^##*/
